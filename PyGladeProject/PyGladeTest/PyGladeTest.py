@@ -24,6 +24,9 @@ class PyGladeTest:
     def cancelClicked(self, widget, Data=None):
         print "Cancel pressed"
         return False
+    
+    def destroy(self, widget, data=None):
+        gtk.main_quit()
 
     def __init__(self):
         '''
@@ -36,6 +39,7 @@ class PyGladeTest:
         self.cancelButton = builder.get_object("cancelButton")
         
         self.window.connect("delete_event", self.delete_event)
+        self.window.connect("destroy", self.destroy)
         
         self.okButton.connect("clicked", self.okClicked)
         self.okButton.connect_object("clicked", gtk.Widget.destroy, self.window)
